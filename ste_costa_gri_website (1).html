@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Costa-Gri s.a.r.l | Noble Plante</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        logo: ['Fredoka', 'sans-serif'],
+                    },
+                    colors: {
+                        costa: {
+                            green: '#78C027',
+                            darkgreen: '#5A9E19',
+                            leaf: '#388E3C',
+                            blue: '#3BB0EB',
+                            darkblue: '#0288D1',
+                        },
+                        brand: {
+                            50: '#f4fbf0',
+                            100: '#e5f6db',
+                            500: '#78C027',
+                            600: '#64a71d',
+                            700: '#4e8615',
+                            800: '#3a660d',
+                            900: '#254406',
+                        },
+                        earth: {
+                            50: '#fcfbf9',
+                            100: '#f5f4f0',
+                            200: '#e7e5de',
+                            800: '#292524',
+                            900: '#1c1917',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .page-section {
+            display: none;
+            animation: fadeIn 0.4s ease-in-out;
+        }
+        .page-section.active {
+            display: block;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .nav-link.active {
+            color: #78C027;
+            border-bottom: 3px solid #78C027;
+        }
+        .hero-banner-bg {
+            background-image: linear-gradient(rgba(20, 45, 15, 0.75), rgba(28, 25, 23, 0.85)), url('https://images.unsplash.com/photo-1592424001835-53f62eb34762?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
+            background-size: cover;
+            background-position: center;
+        }
+    </style>
+</head>
+<body class="bg-earth-100 text-earth-800 font-sans flex flex-col min-h-screen">
+
+    <header class="bg-white shadow-md fixed w-full top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-24 items-center">
+                <!-- Official Logo Reproduction -->
+                <div class="flex-shrink-0 flex items-center cursor-pointer py-2" onclick="navigateTo('accueil')">
+                    <div class="flex items-center space-x-3 bg-white p-1 rounded-xl">
+                        <!-- SVG Plant & Drop Icon matching image -->
+                        <svg class="w-14 h-14" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <!-- Water drop -->
+                            <path d="M135 30 C135 30 155 60 155 72 C155 83 146 92 135 92 C124 92 115 83 115 72 C115 60 135 30 135 30 Z" fill="#3BB0EB" />
+                            <path d="M130 48 C130 48 140 68 138 75 C136 78 132 80 128 78" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round"/>
+                            <!-- Soil base -->
+                            <ellipse cx="98" cy="155" rx="28" ry="6" fill="#3E2723" />
+                            <!-- Main stem -->
+                            <path d="M98 152 Q97 120 95 90" stroke="#78C027" stroke-width="7" stroke-linecap="round" />
+                            <!-- Center Top Leaf -->
+                            <path d="M95 95 C90 60 97 38 97 38 C97 38 120 60 102 98 Z" fill="#78C027" stroke="#438B12" stroke-width="2"/>
+                            <path d="M96 90 Q97 60 97 45" stroke="#FFFFFF" stroke-width="1.5" opacity="0.6"/>
+                            <!-- Left Leaf -->
+                            <path d="M96 122 C65 110 45 92 45 92 C45 92 72 82 97 110 Z" fill="#78C027" stroke="#438B12" stroke-width="2"/>
+                            <path d="M95 118 Q70 102 55 95" stroke="#FFFFFF" stroke-width="1.5" opacity="0.6"/>
+                            <!-- Right Leaf -->
+                            <path d="M97 112 C125 98 142 108 142 108 C142 108 122 128 97 124 Z" fill="#78C027" stroke="#438B12" stroke-width="2"/>
+                            <path d="M98 114 Q118 110 132 109" stroke="#FFFFFF" stroke-width="1.5" opacity="0.6"/>
+                        </svg>
+                        
+                        <!-- Logo Typography matching Image -->
+                        <div class="flex flex-col">
+                            <div class="flex items-baseline">
+                                <span class="text-2xl sm:text-3xl font-bold font-logo text-costa-green tracking-tight leading-none">Costa-Gri</span>
+                                <span class="text-sm font-semibold text-costa-blue ml-1.5 font-sans">s.a.r.l</span>
+                            </div>
+                            <span class="text-base font-medium font-logo text-costa-green tracking-wide leading-tight">Noble Plante</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Desktop Menu Navigation -->
+                <nav class="hidden md:flex space-x-8">
+                    <a href="#" onclick="navigateTo('accueil')" class="nav-link active text-gray-700 hover:text-costa-green px-1 py-2 font-semibold transition-colors" data-target="accueil">Accueil</a>
+                    <a href="#" onclick="navigateTo('apropos')" class="nav-link text-gray-700 hover:text-costa-green px-1 py-2 font-semibold transition-colors" data-target="apropos">À Propos</a>
+                    <a href="#" onclick="navigateTo('produits')" class="nav-link text-gray-700 hover:text-costa-green px-1 py-2 font-semibold transition-colors" data-target="produits">Nos Produits & Greffage</a>
+                    <a href="#" onclick="navigateTo('certification')" class="nav-link text-gray-700 hover:text-costa-green px-1 py-2 font-semibold transition-colors" data-target="certification">Certification</a>
+                    <a href="#" onclick="navigateTo('contact')" class="nav-link text-gray-700 hover:text-costa-green px-1 py-2 font-semibold transition-colors" data-target="contact">Contact</a>
+                </nav>
+
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-btn" class="text-gray-700 hover:text-costa-green focus:outline-none p-2">
+                        <i class="fa-solid fa-bars text-3xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Slide-out -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-100 shadow-xl absolute w-full">
+            <div class="px-4 pt-3 pb-6 space-y-3">
+                <a href="#" onclick="navigateTo('accueil'); toggleMobileMenu()" class="block px-4 py-3 rounded-xl text-base font-medium text-gray-900 hover:bg-brand-50 hover:text-costa-green">Accueil</a>
+                <a href="#" onclick="navigateTo('apropos'); toggleMobileMenu()" class="block px-4 py-3 rounded-xl text-base font-medium text-gray-900 hover:bg-brand-50 hover:text-costa-green">À Propos</a>
+                <a href="#" onclick="navigateTo('produits'); toggleMobileMenu()" class="block px-4 py-3 rounded-xl text-base font-medium text-gray-900 hover:bg-brand-50 hover:text-costa-green">Nos Produits & Greffage</a>
+                <a href="#" onclick="navigateTo('certification'); toggleMobileMenu()" class="block px-4 py-3 rounded-xl text-base font-medium text-gray-900 hover:bg-brand-50 hover:text-costa-green">Certification</a>
+                <a href="#" onclick="navigateTo('contact'); toggleMobileMenu()" class="block px-4 py-3 rounded-xl text-base font-medium text-gray-900 hover:bg-brand-50 hover:text-costa-green">Contact</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content Body -->
+    <main class="flex-grow pt-24">
+        
+        <section id="accueil" class="page-section active">
+            <!-- Hero Banner -->
+            <div class="hero-banner-bg w-full py-20 md:py-28 px-4 relative flex items-center justify-center">
+                <div class="max-w-5xl mx-auto text-center">
+                    
+                    <!-- Official Logo Badge inside Hero Banner -->
+                    <div class="inline-flex flex-col items-center bg-white/95 backdrop-blur-md px-8 py-6 rounded-3xl shadow-2xl mb-8 border border-white/40 transform hover:scale-105 transition-transform duration-300">
+                        <svg class="w-24 h-24 sm:w-28 sm:h-28" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M135 30 C135 30 155 60 155 72 C155 83 146 92 135 92 C124 92 115 83 115 72 C115 60 135 30 135 30 Z" fill="#3BB0EB" />
+                            <path d="M130 48 C130 48 140 68 138 75 C136 78 132 80 128 78" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round"/>
+                            <ellipse cx="98" cy="155" rx="28" ry="6" fill="#3E2723" />
+                            <path d="M98 152 Q97 120 95 90" stroke="#78C027" stroke-width="7" stroke-linecap="round" />
+                            <path d="M95 95 C90 60 97 38 97 38 C97 38 120 60 102 98 Z" fill="#78C027" stroke="#438B12" stroke-width="2"/>
+                            <path d="M96 90 Q97 60 97 45" stroke="#FFFFFF" stroke-width="1.5" opacity="0.6"/>
+                            <path d="M96 122 C65 110 45 92 45 92 C45 92 72 82 97 110 Z" fill="#78C027" stroke="#438B12" stroke-width="2"/>
+                            <path d="M95 118 Q70 102 55 95" stroke="#FFFFFF" stroke-width="1.5" opacity="0.6"/>
+                            <path d="M97 112 C125 98 142 108 142 108 C142 108 122 128 97 124 Z" fill="#78C027" stroke="#438B12" stroke-width="2"/>
+                            <path d="M98 114 Q118 110 132 109" stroke="#FFFFFF" stroke-width="1.5" opacity="0.6"/>
+                        </svg>
+                        <div class="text-center mt-2">
+                            <div class="flex items-baseline justify-center">
+                                <span class="text-3xl sm:text-4xl font-bold font-logo text-costa-green tracking-tight">Costa-Gri</span>
+                                <span class="text-lg font-semibold text-costa-blue ml-1.5 font-sans">s.a.r.l</span>
+                            </div>
+                            <span class="text-xl font-medium font-logo text-costa-green tracking-wider block">Noble Plante</span>
+                        </div>
+                    </div>
+
+                    <h1 class="text-3xl md:text-5xl font-extrabold text-white mb-6 leading-tight drop-shadow-md">
+                        Pépinière Agricole Spécialisée en <br><span class="text-costa-green">Greffage & Plants Certifiés</span>
+                    </h1>
+                    
+                    <p class="text-lg md:text-xl text-gray-200 mb-8 max-w-3xl mx-auto font-light leading-relaxed">
+                        Depuis 2015 à Chtouka Ait Baha (Souss-Massa), nous produisons des plants d'excellence pour maraîchage (tomates, poivrons, concombres) et bananiers.
+                    </p>
+
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                        <button onclick="navigateTo('produits')" class="px-8 py-4 bg-costa-green hover:bg-costa-darkgreen text-white font-bold rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1">
+                            Découvrir Nos Plants
+                        </button>
+                        <button onclick="navigateTo('contact')" class="px-8 py-4 bg-white/15 hover:bg-white/25 text-white border border-white/40 font-bold rounded-xl backdrop-blur-md transition-all duration-300">
+                            Nous Contacter
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Features Highlights -->
+            <div class="py-16 bg-white">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                        <div class="p-8 rounded-2xl bg-earth-50 border border-gray-100 shadow-sm hover:shadow-md transition-shadow">
+                            <div class="w-14 h-14 bg-brand-100 rounded-xl flex items-center justify-center text-costa-green text-2xl mb-6">
+                                <i class="fa-solid fa-seedling"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-gray-900 mb-3">Greffage de Haute Précision</h3>
+                            <p class="text-gray-600 leading-relaxed">Plants greffés vigoureux assurant une forte résistance racinaire et une meilleure productivité sous serre.</p>
+                        </div>
+
+                        <div class="p-8 rounded-2xl bg-earth-50 border border-gray-100 shadow-sm hover:shadow-md transition-shadow">
+                            <div class="w-14 h-14 bg-sky-100 rounded-xl flex items-center justify-center text-costa-blue text-2xl mb-6">
+                                <i class="fa-solid fa-certificate"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-gray-900 mb-3">Certification Officielle</h3>
+                            <p class="text-gray-600 leading-relaxed">Agréé par le Ministère de l'Agriculture du Maroc pour la vente de plants et semences hautement contrôlés.</p>
+                        </div>
+
+                        <div class="p-8 rounded-2xl bg-earth-50 border border-gray-100 shadow-sm hover:shadow-md transition-shadow">
+                            <div class="w-14 h-14 bg-brand-100 rounded-xl flex items-center justify-center text-costa-green text-2xl mb-6">
+                                <i class="fa-solid fa-location-dot"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-gray-900 mb-3">Ancrage Souss-Massa</h3>
+                            <p class="text-gray-600 leading-relaxed">Implanté au cœur de la zone agricole de Chtouka Ait Baha (Inchaden), au plus près des producteurs.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="apropos" class="page-section py-16 md:py-24 bg-white">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16">
+                    <span class="text-costa-green font-bold text-sm tracking-widest uppercase">Pépinière Noble Plante</span>
+                    <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mt-2 mb-4">À Propos de <span class="text-costa-green">Costa-Gri s.a.r.l</span></h2>
+                    <div class="h-1.5 w-24 bg-costa-green mx-auto rounded-full"></div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                    <div class="relative">
+                        <img src="https://images.unsplash.com/photo-1599839619722-39751411ea63?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Pépinière Costa-Gri" class="rounded-3xl shadow-2xl object-cover w-full h-[420px]">
+                        <div class="absolute -bottom-6 -right-6 bg-costa-green text-white p-6 rounded-2xl shadow-xl hidden sm:block">
+                            <p class="text-4xl font-extrabold">2015</p>
+                            <p class="text-sm font-medium opacity-90">Création de l'entreprise</p>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="text-2xl font-bold text-gray-900 mb-6">L'Excellence Horticole au Service des Agriculteurs</h3>
+                        <p class="text-gray-600 mb-6 leading-relaxed">
+                            Créée en 2015, la société <strong>STE COSTA-GRI (Noble Plante)</strong> s'est spécialisée dans la production et la commercialisation de plants maraîchers, horticoles et de bananiers certifiés.
+                        </p>
+                        <p class="text-gray-600 mb-6 leading-relaxed">
+                            Grâce à nos serres modernes situées à Douar Aghroud (Ait Bakou, Commune Inchaden), nous appliquons les meilleures normes de greffage pour fournir aux agriculteurs de Souss-Massa et de tout le Maroc des plants sains, résistants et à très fort rendement.
+                        </p>
+                        
+                        <div class="bg-brand-50 border-l-4 border-costa-green p-6 rounded-r-2xl mb-6">
+                            <h4 class="font-bold text-gray-900 text-lg mb-1">Expertise technique en greffage</h4>
+                            <p class="text-gray-700 text-sm">Contrôle sanitaire strict, choix rigoureux des porte-greffes et suivi personnalisé des commandes.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="produits" class="page-section py-16 md:py-24 bg-earth-100">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16">
+                    <span class="text-costa-blue font-bold text-sm tracking-widest uppercase">Notre Symmetrical Quality</span>
+                    <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mt-2 mb-4">Nos Plants <span class="text-costa-green">& Greffage</span></h2>
+                    <div class="h-1.5 w-24 bg-costa-green mx-auto rounded-full mb-6"></div>
+                    <p class="max-w-3xl mx-auto text-gray-600 text-lg">Découvrez nos plants d'élite soigneusement cultivés sous serres contrôlées.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Tomates -->
+                    <div class="bg-white rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300">
+                        <div class="h-60 overflow-hidden relative">
+                            <img src="https://images.unsplash.com/photo-1592841200221-a6898f307baa?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Plants de Tomate" class="w-full h-full object-cover">
+                            <span class="absolute top-4 right-4 bg-costa-green text-white text-xs font-bold px-3 py-1.5 rounded-full uppercase">Plants Greffés</span>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold text-gray-900 mb-2">Plants de Tomates</h3>
+                            <p class="text-gray-600 text-sm leading-relaxed mb-4">Greffage haut de gamme offrant résistance aux maladies du sol (telluriques) et vigueur pour de longues campagnes de récolte.</p>
+                        </div>
+                    </div>
+
+                    <!-- Poivrons -->
+                    <div class="bg-white rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300">
+                        <div class="h-60 overflow-hidden relative">
+                            <img src="https://images.unsplash.com/photo-1563565375-f3fdfdbefa83?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Plants de Poivron" class="w-full h-full object-cover">
+                            <span class="absolute top-4 right-4 bg-costa-green text-white text-xs font-bold px-3 py-1.5 rounded-full uppercase">Plants Greffés</span>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold text-gray-900 mb-2">Plants de Poivrons</h3>
+                            <p class="text-gray-600 text-sm leading-relaxed mb-4">Variétés certifiées à haute valeur ajoutée, adaptées aux conditions de culture en serre dans le Souss.</p>
+                        </div>
+                    </div>
+
+                    <!-- Concombres -->
+                    <div class="bg-white rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300">
+                        <div class="h-60 overflow-hidden relative">
+                            <img src="https://images.unsplash.com/photo-1628156681014-9b55239c0fb0?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Plants de Concombre" class="w-full h-full object-cover">
+                            <span class="absolute top-4 right-4 bg-costa-green text-white text-xs font-bold px-3 py-1.5 rounded-full uppercase">Plants Greffés</span>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold text-gray-900 mb-2">Plants de Concombres</h3>
+                            <p class="text-gray-600 text-sm leading-relaxed mb-4">Croissance rapide, enracinement robuste et tolérance renforcée aux fluctuations thermiques.</p>
+                        </div>
+                    </div>
+
+                    <!-- Bananiers -->
+                    <div class="bg-white rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 md:col-span-2 lg:col-span-3 flex flex-col md:flex-row">
+                        <div class="h-64 md:h-auto md:w-2/5 relative overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1592358872584-90a6e02611be?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Plants de Bananier" class="w-full h-full object-cover">
+                            <span class="absolute top-4 left-4 bg-costa-blue text-white text-xs font-bold px-3 py-1.5 rounded-full uppercase">Spécialité Horticulture</span>
+                        </div>
+                        <div class="p-8 md:w-3/5 flex flex-col justify-center">
+                            <h3 class="text-2xl font-bold text-gray-900 mb-3">Plants de Bananiers Certifiés</h3>
+                            <p class="text-gray-600 leading-relaxed mb-6">Notre pépinière produit des vitroplants et souches de bananiers rigoureusement sélectionnées pour leur état sanitaire irréprochable et leur reprise rapide en plantation sous abri.</p>
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                                <div class="flex items-center text-gray-700 font-medium"><i class="fa-solid fa-circle-check text-costa-green mr-2"></i> Sans nématodes ni viroses</div>
+                                <div class="flex items-center text-gray-700 font-medium"><i class="fa-solid fa-circle-check text-costa-green mr-2"></i> Homogénéité de parcelle</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="certification" class="page-section py-16 md:py-24 bg-white">
+            <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-12">
+                    <span class="text-costa-blue font-bold text-sm tracking-widest uppercase">Garantie Officielle</span>
+                    <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mt-2 mb-4">Agrément & Certification</h2>
+                    <div class="h-1.5 w-24 bg-costa-blue mx-auto rounded-full"></div>
+                </div>
+
+                <div class="bg-gradient-to-br from-brand-50 to-sky-50 rounded-3xl p-8 md:p-12 border border-brand-100 shadow-xl text-center">
+                    <div class="w-20 h-20 bg-white rounded-full flex items-center justify-center mx-auto mb-6 shadow-md text-costa-green text-4xl">
+                        <i class="fa-solid fa-award"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-900 mb-4">Autorisé par le Ministère de l'Agriculture du Maroc</h3>
+                    <p class="text-gray-700 text-lg leading-relaxed max-w-3xl mx-auto mb-8">
+                        La société <strong>STE COSTA-GRI s.a.r.l (Noble Plante)</strong> dispose de l'agrément officiel pour la commercialisation des semences et des plants certifiés. Chaque lot produit fait l'objet d'un contrôle phytosanitaire rigoureux.
+                    </p>
+                    <div class="inline-flex items-center space-x-2 bg-white px-6 py-3 rounded-full text-costa-darkgreen font-semibold shadow-sm border border-brand-200">
+                        <i class="fa-solid fa-shield-halved text-costa-blue"></i>
+                        <span>Conformité & Traçabilité Garantie</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="page-section py-16 md:py-24 bg-earth-100">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16">
+                    <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Contactez <span class="text-costa-green">Costa-Gri</span></h2>
+                    <div class="h-1.5 w-24 bg-costa-green mx-auto rounded-full"></div>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 bg-white rounded-3xl shadow-2xl overflow-hidden">
+                    <!-- Left Info Column -->
+                    <div class="bg-costa-darkgreen text-white p-10 md:p-12 flex flex-col justify-between relative overflow-hidden">
+                        <div class="relative z-10">
+                            <div class="flex items-center space-x-3 mb-6 bg-white/10 p-3 rounded-2xl backdrop-blur-sm w-fit">
+                                <span class="text-2xl font-bold font-logo text-white">Costa-Gri s.a.r.l</span>
+                            </div>
+                            <h3 class="text-2xl font-bold mb-8">Noble Plante - Pépinières</h3>
+
+                            <div class="space-y-6">
+                                <div class="flex items-start">
+                                    <div class="w-12 h-12 bg-white/15 rounded-xl flex items-center justify-center flex-shrink-0 mr-4 text-costa-blue text-xl">
+                                        <i class="fa-solid fa-location-dot text-white"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-bold text-lg">Adresse</h4>
+                                        <p class="text-brand-100 text-sm leading-relaxed mt-1">
+                                            Douar Aghroud, Ait Bakou,<br>
+                                            Commune Inchaden (Belfaa),<br>
+                                            Chtouka Ait Baha, Souss-Massa, Maroc
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <div class="flex items-center">
+                                    <div class="w-12 h-12 bg-white/15 rounded-xl flex items-center justify-center flex-shrink-0 mr-4 text-white text-xl">
+                                        <i class="fa-solid fa-phone"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-bold text-lg">Téléphone</h4>
+                                        <p class="text-brand-100 text-lg font-semibold mt-0.5">+212 5 28 30 30 65</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mt-12 pt-6 border-t border-white/20 text-xs text-brand-100">
+                            Pépinières certifiées - Souss-Massa, Maroc
+                        </div>
+                    </div>
+
+                    <!-- Right Form Column -->
+                    <div class="p-8 md:p-12">
+                        <h3 class="text-2xl font-bold text-gray-900 mb-6">Demande d'Information / Commande</h3>
+                        <form id="contactForm" onsubmit="event.preventDefault(); showMessage();" class="space-y-5">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1.5">Nom et Prénom / Enseigne *</label>
+                                <input type="text" required class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-costa-green focus:border-costa-green outline-none transition-all">
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1.5">Numéro de Téléphone *</label>
+                                <input type="tel" required class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-costa-green focus:border-costa-green outline-none transition-all">
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1.5">Type de plants recherché</label>
+                                <select class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-costa-green focus:border-costa-green outline-none transition-all bg-white">
+                                    <option>Tomates Greffées</option>
+                                    <option>Poivrons Greffés</option>
+                                    <option>Concombres Greffés</option>
+                                    <option>Bananiers</option>
+                                    <option>Autre type de plant</option>
+                                </select>
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1.5">Message / Quantité souhaitée *</label>
+                                <textarea rows="4" required class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-costa-green focus:border-costa-green outline-none transition-all resize-none"></textarea>
+                            </div>
+
+                            <button type="submit" class="w-full bg-costa-green hover:bg-costa-darkgreen text-white font-bold py-4 rounded-xl shadow-lg transition-colors flex items-center justify-center space-x-2">
+                                <span>Envoyer le Message</span>
+                                <i class="fa-solid fa-paper-plane"></i>
+                            </button>
+
+                            <div id="formSuccess" class="hidden p-4 bg-green-100 text-green-800 rounded-xl text-sm font-medium">
+                                <i class="fa-solid fa-circle-check mr-2"></i> Message envoyé avec succès ! Notre équipe vous rappellera rapidement.
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-earth-900 text-white py-12 border-t border-earth-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div>
+                <div class="flex items-center space-x-2 mb-4">
+                    <span class="text-2xl font-bold font-logo text-costa-green">Costa-Gri</span>
+                    <span class="text-sm text-costa-blue">s.a.r.l</span>
+                </div>
+                <p class="text-gray-400 text-sm leading-relaxed">
+                    STE COSTA-GRI (Noble Plante) - Pépinières spécialisées en plants greffés et bananiers certifiés depuis 2015 à Chtouka Ait Baha.
+                </p>
+            </div>
+            <div>
+                <h4 class="text-lg font-bold mb-4 border-b border-gray-800 pb-2">Navigation</h4>
+                <ul class="space-y-2 text-sm text-gray-400">
+                    <li><a href="#" onclick="navigateTo('accueil')" class="hover:text-costa-green">Accueil</a></li>
+                    <li><a href="#" onclick="navigateTo('apropos')" class="hover:text-costa-green">À Propos</a></li>
+                    <li><a href="#" onclick="navigateTo('produits')" class="hover:text-costa-green">Nos Produits</a></li>
+                    <li><a href="#" onclick="navigateTo('certification')" class="hover:text-costa-green">Certification</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="text-lg font-bold mb-4 border-b border-gray-800 pb-2">Contact Direct</h4>
+                <p class="text-gray-400 text-sm mb-2"><i class="fa-solid fa-phone mr-2 text-costa-green"></i> +212 5 28 30 30 65</p>
+                <p class="text-gray-400 text-sm"><i class="fa-solid fa-location-dot mr-2 text-costa-green"></i> Chtouka Ait Baha, Souss-Massa</p>
+            </div>
+        </div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-12 pt-8 border-t border-gray-800 text-center text-xs text-gray-500">
+            &copy; 2026 Costa-Gri s.a.r.l (Noble Plante). Tous droits réservés.
+        </div>
+    </footer>
+
+    <script>
+        function navigateTo(sectionId) {
+            if(window.event) window.event.preventDefault();
+
+            // Hide all sections
+            const sections = document.querySelectorAll('.page-section');
+            sections.forEach(sec => sec.classList.remove('active'));
+
+            // Show selected section
+            const target = document.getElementById(sectionId);
+            if(target) {
+                target.classList.add('active');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+
+            // Update Nav link active style
+            const navLinks = document.querySelectorAll('.nav-link');
+            navLinks.forEach(link => {
+                if(link.getAttribute('data-target') === sectionId) {
+                    link.classList.add('active');
+                } else {
+                    link.classList.remove('active');
+                }
+            });
+        }
+
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        }
+
+        document.getElementById('mobile-menu-btn').addEventListener('click', toggleMobileMenu);
+
+        function showMessage() {
+            const successMsg = document.getElementById('formSuccess');
+            successMsg.classList.remove('hidden');
+            setTimeout(() => {
+                successMsg.classList.add('hidden');
+            }, 5000);
+        }
+    </script>
+</body>
+</html>
